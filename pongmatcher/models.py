@@ -10,6 +10,9 @@ class MatchRequest(models.Model):
                 "player": self.player_uuid,
                 }
 
+    def match_id(self):
+        return None
+
 class Participant(models.Model):
     match_uuid = models.CharField(max_length=200)
     match_request_uuid = models.CharField(max_length=200)
