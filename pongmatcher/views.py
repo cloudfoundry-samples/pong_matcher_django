@@ -16,6 +16,7 @@ class JSONResponse(HttpResponse):
 def wipe(request):
     if request.method == 'DELETE':
         MatchRequest.objects.all().delete()
+        Participant.objects.all().delete()
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=404)

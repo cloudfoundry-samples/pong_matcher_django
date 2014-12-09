@@ -7,4 +7,6 @@ class MatchRequestSerializer(serializers.Serializer):
     match_id = serializers.CharField(required=False)
 
     def create(self, validated_data):
-        return MatchRequest.objects.create(**validated_data)
+        match_request = MatchRequest.objects.create(**validated_data)
+        match_request.persist_participants()
+        return match_request
