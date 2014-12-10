@@ -112,7 +112,7 @@ export HOST=http://localhost:8000
 Now follow the [interaction instructions](#interaction-instructions).
 
 NB: you can also use Foreman to run the migrations and start the app server
-with `foreman start`. However, foreman defaults to a different port (5000), so
+with `foreman start`. However, Foreman defaults to a different port (5000), so
 be sure to export the test host with port 5000 instead of 8000.
 
 ## Interaction instructions
