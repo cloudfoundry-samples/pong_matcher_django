@@ -39,6 +39,15 @@ export HOST=http://mysubdomain.cfapps.io
 
 Now follow the [interaction instructions](#interaction-instructions).
 
+NB: By default, the app runs with an insecure, shared
+[SECRET_KEY][django-deployment]. If you care about security in your app, you
+should set this in an environment variable:
+
+```bash
+cf set-env djangopong SECRET_KEY thesecretkeythatonlyyouknow
+cf restage djangopong
+```
+
 ## Running locally
 
 The following assumes you have a working, 3.4.x version of [Python][python]
@@ -157,3 +166,4 @@ allow pairs who've already played to play again.
 [pws]:https://run.pivotal.io
 [python]:https://www.python.org
 [pip]:https://pip.pypa.io/en/latest/
+[django-deployment]:https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
