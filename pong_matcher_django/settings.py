@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+from urllib.parse import urlparse
 
 
 # Quick-start development settings - unsuitable for production
@@ -58,10 +59,20 @@ WSGI_APPLICATION = 'pong_matcher_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+url = urlparse(
+        os.environ.get(
+            'DATABASE_URL',
+            'mysql2://djangopong:djangopong@127.0.0.1:3306/pong_matcher_django_development'
+            )
+        )
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'mysql.connector.django',
+        'NAME': url.path[1:],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
     }
 }
 
