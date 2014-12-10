@@ -24,7 +24,7 @@ DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = [ 'localhost' ]
+ALLOWED_HOSTS = [ 'localhost', '.cfapps.io' ]
 
 
 # Application definition
