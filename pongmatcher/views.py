@@ -3,8 +3,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from pongmatcher.models import MatchRequest
+from pongmatcher.models import MatchRequest, Participant
 from pongmatcher.serializers import MatchRequestSerializer
+from pongmatcher.finders import Match
 
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
@@ -45,3 +46,11 @@ def match_request_detail(request, uuid):
             return HttpResponse(status=404)
     else:
         return HttpResponse(status=405)
+
+@csrf_exempt
+def match_detail(request, uuid):
+    match = Match.get(uuid)
+    if match:
+        return JSONResponse(match)
+    else:
+        return HttpResponse(status=404)
