@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from pongmatcher.models import MatchRequest, Participant
-from pongmatcher.serializers import MatchRequestSerializer
+from pongmatcher.serializers import MatchRequestSerializer, MatchSerializer
 from pongmatcher.finders import Match
 
 class JSONResponse(HttpResponse):
@@ -51,6 +51,14 @@ def match_request_detail(request, uuid):
 def match_detail(request, uuid):
     match = Match.get(uuid)
     if match:
-        return JSONResponse(match)
+        serializer = MatchSerializer(match)
+        return JSONResponse(serializer.data)
     else:
         return HttpResponse(status=404)
+
+@csrf_exempt
+def result_list(request):
+    if request.method == 'POST':
+        return HttpResponse(status=201)
+    else:
+        return HttpResponse(status=405)
